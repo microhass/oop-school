@@ -2,14 +2,15 @@ require_relative '../decorators/nameable'
 
 class Person < Nameable
   def initialize(age, name = 'Unknown', parent_pamission: true)
-    super
+    super()
     @name = name
     @age = age
     @parent_pamission = parent_pamission
     @id = Time.new.to_f
+    @rentals = []
   end
 
-  attr_reader(:id)
+  attr_reader(:id, :rentals)
   attr_accessor(:name, :age)
 
   def can_use_services?
@@ -18,6 +19,10 @@ class Person < Nameable
 
   def correct_name
     @name
+  end
+
+  def add_rental(book)
+    @rentals << book
   end
 
   private
