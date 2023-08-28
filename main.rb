@@ -17,8 +17,8 @@ ps = Person.new(22, 'Jane Doe')
 bk1 = Book.new('Shatter Me', 'Tahereh Mafi')
 bk2 = Book.new('The Last Black Unicorn', 'Tiffany Hadish')
 
-ren1 = Rental.new(bk1, ps, Time.now)
-ren2 = Rental.new(bk2, ps, Time.now)
+Rental.new(bk1, ps, Time.now)
+Rental.new(bk2, ps, Time.now)
 
 puts "#{ps.name} has borrowed:"
-ps.rentals.each {|book| p book.title}
+ps.rentals.each { |book| p book.title }
