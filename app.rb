@@ -8,6 +8,7 @@ class App
   def initialize
     @people = []
     @books = []
+    @rentals = []
   end
 
   def run
@@ -42,7 +43,7 @@ class App
 
   def call_activity_for(choice)
     case choice
-    when 1 then display_books
+    when 1 then display_books(false)
     when 2 then display_people(false)
     when 3 then create_person
     when 4 then create_book
@@ -92,8 +93,8 @@ class App
     has_permission = nil
 
     loop do
-      has_permission = gets.chomp.downcase
-      break unless map_permission[has_permission].nil?
+      has_permission = map_permission[gets.chomp.downcase]
+      break unless has_permission.nil?
 
       print 'Invalid permission! [Y/N]: '
     end
@@ -130,11 +131,21 @@ class App
     person_index = validate_input(gets.chomp.to_i, @people.length)
 
     rent_date = fetch_string('date (yy/mm/dd)')
-    Rental.new(@books[book_index - 1], @people[person_index - 1], rent_date)
+    @rentals << Rental.new(@books[book_index - 1], @people[person_index - 1], rent_date)
     notify_created('rental')
   end
 
-  # date:, book '' by
+  def display_rentals
+    print 'ID of person: '
+    person_id = gets.chomp.to_i
+
+    found_rentals = @rentals.filter { |rental| rental.person.id == person_id }
+
+    puts 'Rentals'
+    found_rentals.each do |rental|
+      puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
+    end
+  end
 
   def fetch_age
     print 'Age: '
