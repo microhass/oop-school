@@ -17,15 +17,7 @@ module ObjectCreators
     name = fetch_string('name')
 
     print 'Has parent permission? [Y/N]: '
-    map_permission = { 'n' => false, 'y' => true }
-    has_permission = nil
-
-    loop do
-      has_permission = map_permission[gets.chomp.downcase]
-      break unless has_permission.nil?
-
-      print 'Invalid permission! [Y/N]: '
-    end
+    has_permission = fetch_valid_permission
 
     @people << Student.new(age, name, has_permission)
     notify_created('student')

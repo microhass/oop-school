@@ -5,10 +5,23 @@ module InputValidators
       break if input_is_valid
 
       print 'Please enter a valid input: '
-
       input = gets.chomp.to_i
     end
 
     input
+  end
+
+  def fetch_valid_permission
+    map_permission = { 'n' => false, 'y' => true }
+    has_permission = nil
+
+    loop do
+      has_permission = map_permission[gets.chomp.downcase]
+      break unless has_permission.nil?
+
+      print 'Invalid permission! [Y/N]: '
+    end
+
+    has_permission
   end
 end
