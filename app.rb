@@ -43,7 +43,7 @@ class App
   def call_activity_for(choice)
     case choice
     when 1 then display_books
-    # when 2 then list_people
+    when 2 then display_people
     when 3 then create_person
     when 4 then create_book
     # when 5 then create_rental
@@ -53,8 +53,17 @@ class App
   end
 
   def display_books
-    return puts "You haven't created any books!\n\n" if @books.length == 0
-    @books.each { |book| puts "Title: '#{book.title}', Author: '#{book.author}'"}
+    return puts "You haven't created any books!\n\n" if @books.empty?
+
+    @books.each { |book| puts "Title: '#{book.title}', Author: '#{book.author}'" }
+  end
+
+  def display_people
+    return puts "You haven't created any people!\n\n" if @people.empty?
+
+    @people.each do |person|
+      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
   end
 
   def create_person
