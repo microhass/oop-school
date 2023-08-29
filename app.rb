@@ -43,26 +43,30 @@ class App
   def call_activity_for(choice)
     case choice
     when 1 then display_books
-    when 2 then display_people
+    when 2 then display_people(false)
     when 3 then create_person
     when 4 then create_book
-    # when 5 then create_rental
-    # when 6 then list_rentals
+    when 5 then create_rental
+    when 6 then display_rentals
     else puts 'Invalid choice, please try again!'
     end
   end
 
-  def display_books
+  def display_books(show_index)
     return puts "You haven't created any books!\n\n" if @books.empty?
 
-    @books.each { |book| puts "Title: '#{book.title}', Author: '#{book.author}'" }
+    @books.each_with_index do |book, index|
+      num = "#{index + 1}) " if show_index
+      puts "#{num}Title: '#{book.title}', Author: '#{book.author}'"
+    end
   end
 
-  def display_people
+  def display_people(show_index)
     return puts "You haven't created any people!\n\n" if @people.empty?
 
-    @people.each do |person|
-      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    @people.each_with_index do |person, index|
+      num = "#{index + 1}) " if show_index
+      puts "#{num}[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
@@ -115,6 +119,22 @@ class App
     @books << Book.new(title, author)
     notify_created('book')
   end
+
+  def create_rental
+    puts 'Select a book from the following list by number'
+    display_books(true)
+    book_index = validate_input(gets.chomp.to_i, @books.length)
+
+    puts 'Select a person from the following list by number (not id)'
+    display_people(true)
+    person_index = validate_input(gets.chomp.to_i, @people.length)
+
+    rent_date = fetch_string('date (yy/mm/dd)')
+    Rental.new(@books[book_index - 1], @people[person_index - 1], rent_date)
+    notify_created('rental')
+  end
+
+  # date:, book '' by
 
   def fetch_age
     print 'Age: '
