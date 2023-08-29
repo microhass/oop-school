@@ -12,7 +12,7 @@ module ObjectCreators
   end
 
   def create_student
-    puts 'Creating student...'
+    notify_start_creation('student')
     age = fetch_age
     name = fetch_string('name')
 
@@ -32,7 +32,7 @@ module ObjectCreators
   end
 
   def create_teacher
-    puts 'Creating teacher...'
+    notify_start_creation('teacher')
     age = fetch_age
     name = fetch_string('name')
     specialization = fetch_string('specialization')
@@ -42,6 +42,7 @@ module ObjectCreators
   end
 
   def create_book
+    notify_start_creation('book')
     title = fetch_string('title')
     author = fetch_string('author')
 
@@ -50,6 +51,7 @@ module ObjectCreators
   end
 
   def create_rental
+    notify_start_creation('rental')
     puts 'Select a book from the following list by number'
     display_books(true)
     book_index = validate_input(gets.chomp.to_i, @books.length)

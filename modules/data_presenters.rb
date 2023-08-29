@@ -30,8 +30,4 @@ module DataPresenters
       puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
     end
   end
-
-  def notify_created(title)
-    puts "#{title.capitalize} created successfuly!\n"
-  end
 end

@@ -11,6 +11,7 @@ require_relative 'modules/data_fetchers'
 require_relative 'modules/data_presenters'
 require_relative 'modules/input_validators'
 require_relative 'modules/object_creators'
+require_relative 'modules/user_feedback'
 
 class App
   include AppLogic
@@ -18,6 +19,7 @@ class App
   include DataPresenters
   include InputValidators
   include ObjectCreators
+  include UserFeedback
 
   def initialize
     @people = []
