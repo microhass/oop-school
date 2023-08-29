@@ -61,18 +61,15 @@ class App
 
     case choice
     when 1 then create_student
-    # when 2
+    when 2 then create_teacher
     else puts 'Invalid choice, please try again!'
     end
   end
 
   def create_student
-    print "Creating student...\nAge: "
-    age = gets.chomp.to_i
-    age = validate_input(age, 200)
-
-    print 'Name: '
-    name = gets.chomp
+    puts 'Creating student...'
+    age = fetch_age
+    name = fetch_name
 
     print 'Has parent permission? [Y/N]: '
     map_permission = { 'n' => false, 'y' => true }
@@ -86,9 +83,34 @@ class App
     end
 
     Student.new(age, name, has_permission)
-    puts "Student created successfuly!\n\n"
+    notify_created('student')
   end
 
-  def create_teacher; end
+  def create_teacher
+    puts 'Creating teacher...'
+    age = fetch_age
+    name = fetch_name
+
+    print 'Specialization: '
+    specialization = gets.chomp
+
+    Teacher.new(age, name, true, specialization)
+    notify_created('teacher')
+  end
+
+  def fetch_age
+    print 'Age: '
+    age = gets.chomp.to_i
+    validate_input(age, 200)
+  end
+
+  def fetch_name
+    print 'Name: '
+    gets.chomp
+  end
+
+  def notify_created(title)
+    puts "#{title.capitalize} created successfuly!\n\n"
+  end
 end
 # st = Student.new(age, name, permission)
