@@ -13,7 +13,7 @@ def main
     app.call_activity_for(choice)
   end
 
-  puts 'Thanks for using the App! Have a nice time'
+  puts 'Thank you for using the App! Have a nice time!'
 end
 
 main

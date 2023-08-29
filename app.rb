@@ -54,7 +54,7 @@ class App
   end
 
   def display_books(show_index)
-    return puts "You haven't created any books!\n\n" if @books.empty?
+    return puts "You haven't created any books!\n" if @books.empty?
 
     @books.each_with_index do |book, index|
       num = "#{index + 1}) " if show_index
@@ -63,7 +63,7 @@ class App
   end
 
   def display_people(show_index)
-    return puts "You haven't created any people!\n\n" if @people.empty?
+    return puts "You haven't created any people!\n" if @people.empty?
 
     @people.each_with_index do |person, index|
       num = "#{index + 1}) " if show_index
@@ -141,7 +141,9 @@ class App
 
     found_rentals = @rentals.filter { |rental| rental.person.id == person_id }
 
-    puts 'Rentals'
+    return puts 'No rentals found for the person with that ID!' if found_rentals.empty?
+
+    puts "\nRentals by #{found_rentals[0].person.name}"
     found_rentals.each do |rental|
       puts "Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
     end
@@ -159,7 +161,7 @@ class App
   end
 
   def notify_created(title)
-    puts "#{title.capitalize} created successfuly!\n\n"
+    puts "#{title.capitalize} created successfuly!\n"
   end
 end
 # st = Student.new(age, name, permission)
