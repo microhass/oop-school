@@ -1,4 +1,6 @@
 require_relative 'classes/person'
+require_relative 'classes/student'
+require_relative 'classes/teacher'
 require_relative 'classes/book'
 require_relative 'classes/rental'
 
@@ -9,8 +11,7 @@ class App
   end
 
   def run
-    puts 'Welcome to School library App!'
-    show_options
+    puts "Welcome to School library App!\n\n"
   end
 
   def show_people; end
@@ -23,23 +24,71 @@ class App
       4 - Create a book.
       5 - Create a rental.
       6 - List all rentals for a given person id.
-      7 - Exit."
+      7 - Exit.\n\n"
   end
 
-  def select_opt
-    option = check_options('', (1..9))
-    case option
-    when 1 then list_books
-    when 2 then list_people
+  def validate_input(input, max_val)
+    loop do
+      input_is_valid = input.is_a?(Integer) && input.between?(1, max_val)
+      break if input_is_valid
+
+      print 'Please enter a valid input: '
+
+      input = gets.chomp.to_i
+    end
+
+    input
+  end
+
+  def call_activity_for(choice)
+    case choice
+    when 1 then display_books
+    # when 2 then list_people
     when 3 then create_person
-    when 4 then create_book
-    when 5 then create_rental
-    when 6 then list_rentals
-    when 7
-      write_json
-      7
-    else
-      puts 'Invalid number, please try again!'
+    # when 4 then create_book
+    # when 5 then create_rental
+    # when 6 then list_rentals
+    else puts 'Invalid choice, please try again!'
     end
   end
+
+  def display_books; end
+
+  def create_person
+    puts 'Do you want to create a Student (1) or a Teacher (2)? [Input the number]: '
+    input = gets.chomp.to_i
+    choice = validate_input(input, 2)
+
+    case choice
+    when 1 then create_student
+    # when 2
+    else puts 'Invalid choice, please try again!'
+    end
+  end
+
+  def create_student
+    print "Creating student...\nAge: "
+    age = gets.chomp.to_i
+    age = validate_input(age, 200)
+
+    print 'Name: '
+    name = gets.chomp
+
+    print 'Has parent permission? [Y/N]: '
+    map_permission = { 'n' => false, 'y' => true }
+    has_permission = nil
+
+    loop do
+      has_permission = gets.chomp.downcase
+      break unless map_permission[has_permission].nil?
+
+      print 'Invalid permission! [Y/N]: '
+    end
+
+    Student.new(age, name, has_permission)
+    puts "Student created successfuly!\n\n"
+  end
+
+  def create_teacher; end
 end
+# st = Student.new(age, name, permission)
