@@ -45,7 +45,7 @@ class App
     when 1 then display_books
     # when 2 then list_people
     when 3 then create_person
-    # when 4 then create_book
+    when 4 then create_book
     # when 5 then create_rental
     # when 6 then list_rentals
     else puts 'Invalid choice, please try again!'
@@ -69,7 +69,7 @@ class App
   def create_student
     puts 'Creating student...'
     age = fetch_age
-    name = fetch_name
+    name = fetch_string('name')
 
     print 'Has parent permission? [Y/N]: '
     map_permission = { 'n' => false, 'y' => true }
@@ -82,20 +82,26 @@ class App
       print 'Invalid permission! [Y/N]: '
     end
 
-    Student.new(age, name, has_permission)
+    @people << Student.new(age, name, has_permission)
     notify_created('student')
   end
 
   def create_teacher
     puts 'Creating teacher...'
     age = fetch_age
-    name = fetch_name
+    name = fetch_string('name')
+    specialization = fetch_string('specialization')
 
-    print 'Specialization: '
-    specialization = gets.chomp
-
-    Teacher.new(age, name, true, specialization)
+    @people << Teacher.new(age, name, true, specialization)
     notify_created('teacher')
+  end
+
+  def create_book
+    title = fetch_string('title')
+    author = fetch_string('author')
+
+    @books << Book.new(title, author)
+    notify_created('book')
   end
 
   def fetch_age
@@ -104,8 +110,8 @@ class App
     validate_input(age, 200)
   end
 
-  def fetch_name
-    print 'Name: '
+  def fetch_string(str)
+    print "#{str.capitalize}: "
     gets.chomp
   end
 
