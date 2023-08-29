@@ -11,13 +11,13 @@ class App
   end
 
   def run
-    puts "Welcome to School library App!\n\n"
+    puts "Welcome to School library App!\n"
   end
 
   def show_people; end
 
   def show_options
-    puts "Please choose an option by entering a number:
+    puts "\nPlease choose an option by entering a number:
       1 - List all books.
       2 - List all people.
       3 - Create a person.
@@ -52,7 +52,10 @@ class App
     end
   end
 
-  def display_books; end
+  def display_books
+    return puts "You haven't created any books!\n\n" if @books.length == 0
+    @books.each { |book| puts "Title: '#{book.title}', Author: '#{book.author}'"}
+  end
 
   def create_person
     puts 'Do you want to create a Student (1) or a Teacher (2)? [Input the number]: '
