@@ -1,10 +1,15 @@
+# Classes
 require_relative 'classes/person'
 require_relative 'classes/student'
 require_relative 'classes/teacher'
 require_relative 'classes/book'
 require_relative 'classes/rental'
 require_relative 'classes/classroom'
+
+# Decorators
+require_relative 'decorators/capitalize'
 require_relative 'decorators/nameable'
+require_relative 'decorators/trimmer'
 
 # person = Person.new(22, 'maximilianus')
 # person.correct_name
