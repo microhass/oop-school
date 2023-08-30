@@ -1,5 +1,8 @@
-class Person
+require_relative '../decorators/nameable'
+
+class Person < Nameable
   def initialize(age, name = 'Unknown', parent_pamission: true)
+    super()
     @name = name
     @age = age
     @parent_pamission = parent_pamission
@@ -11,6 +14,10 @@ class Person
 
   def can_use_services?
     (@parent_pamission || of_age?) || false
+  end
+
+  def correct_name
+    @name
   end
 
   private
