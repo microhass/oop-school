@@ -26,4 +26,4 @@ Rental.new(bk1, ps, Time.now)
 Rental.new(bk2, ps, Time.now)
 
 puts "#{ps.name} has borrowed:"
-ps.rentals.each { |book| p book.title }
+ps.rentals.each { |rental| p rental.book.title }
