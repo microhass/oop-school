@@ -13,7 +13,7 @@ class Person < Nameable
   attr_accessor(:name, :age)
 
   def can_use_services?
-    (@parent_pamission && of_age?) || false
+    (@parent_pamission || of_age?) || false
   end
 
   def correct_name
