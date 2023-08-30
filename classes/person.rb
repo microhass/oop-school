@@ -2,7 +2,7 @@ require_relative '../decorators/nameable'
 
 class Person < Nameable
   def initialize(age, name = 'Unknown', parent_pamission: true)
-    super
+    super()
     @name = name
     @age = age
     @parent_pamission = parent_pamission
