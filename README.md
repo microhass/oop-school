@@ -93,8 +93,7 @@ Clone this repository to your desired folder:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Implementing a time period for which a book is to be returned.**
-- [ ] **Making restrictions between People and books on who can borrow which books.**
+- [ ] **None for now**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -7,17 +7,22 @@ class Person < Nameable
     @age = age
     @parent_pamission = parent_pamission
     @id = Time.new.to_f
+    @rentals = []
   end
 
-  attr_reader(:id)
+  attr_reader(:id, :rentals)
   attr_accessor(:name, :age)
 
   def can_use_services?
-    (@parent_pamission || of_age?) || false
+    (@parent_pamission && of_age?) || false
   end
 
   def correct_name
     @name
+  end
+
+  def add_rental(book)
+    @rentals << book
   end
 
   private
