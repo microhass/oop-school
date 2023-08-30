@@ -1,9 +1,9 @@
 require_relative 'person'
 
 class Student < Person
-  def initialize(age, name, parent_pamission, classroom)
+  def initialize(age, name = 'Unknown', parent_pamission: true)
     super(age, name, parent_pamission: parent_pamission)
-    @classroom = classroom
+    @classroom = nil
   end
 
   def play_hooky
