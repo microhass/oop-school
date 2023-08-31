@@ -9,7 +9,7 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_pamission = parent_pamission
-    @id = Time.new.to_f
+    @id = Time.new.to_i
     @rentals = []
   end
 
