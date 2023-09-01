@@ -38,7 +38,7 @@ module ObjectCreators
     title = fetch_string('title')
     author = fetch_string('author')
 
-    @books << Book.new(title, author)
+    @books = Book.new(title, author)
     notify_created('book')
   end
 
