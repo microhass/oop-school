@@ -1,14 +1,16 @@
 # test.rb
-require 'pry'
+# require 'pry'
 
 class A
-  def hello() puts "hello world!" end
+  def hello()
+    puts 'hello world!'
+  end
 end
 
-a = A.new
+A.new
 
 # start a REPL session
-binding.pry
+# binding.pry
 
 # program resumes here (after pry session)
-puts "program resumes here."
+puts 'program resumes here.'
