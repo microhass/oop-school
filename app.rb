@@ -6,12 +6,12 @@ require_relative 'classes/book'
 require_relative 'classes/rental'
 
 # Modules
-require_relative 'modules/app_logic'
-require_relative 'modules/data_fetchers'
-require_relative 'modules/data_presenters'
-require_relative 'modules/input_validators'
-require_relative 'modules/object_creators'
-require_relative 'modules/user_feedback'
+require_relative 'modules/app/app_logic'
+require_relative 'modules/app/data_fetchers'
+require_relative 'modules/app/data_presenters'
+require_relative 'modules/app/input_validators'
+require_relative 'modules/app/object_creators'
+require_relative 'modules/app/user_feedback'
 
 class App
   include AppLogic
@@ -25,7 +25,7 @@ class App
     @people = []
     @books = []
     @rentals = []
-  end
+  end/app
 
   def run
     puts "Welcome to School library App!\n"
