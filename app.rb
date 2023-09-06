@@ -13,6 +13,10 @@ require_relative 'modules/app/input_validators'
 require_relative 'modules/app/object_creators'
 require_relative 'modules/app/user_feedback'
 
+# File management
+require_relative 'modules/storage/data_savers'
+require_relative 'modules/storage/data_loaders'
+
 class App
   include AppLogic
   include DataFetchers
@@ -21,11 +25,14 @@ class App
   include ObjectCreators
   include UserFeedback
 
+  include DataSavers
+  include DataLoaders
+
   def initialize
     @people = []
     @books = []
     @rentals = []
-  end/app
+  end
 
   def run
     puts "Welcome to School library App!\n"

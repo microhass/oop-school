@@ -13,6 +13,7 @@ def main
     app.call_activity_for(choice)
   end
 
+  app.save_data
   puts 'Thank you for using the App! Have a nice time!'
 end
 
