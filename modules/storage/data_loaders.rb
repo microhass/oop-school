@@ -4,16 +4,20 @@ module DataLoaders
     return [] unless File.exist?(file_path)
 
     file = File.open(file_path)
-    persons_read = File.read(file)
-    persons_json = JSON.parse(persons_read)
+    persons_json = JSON.parse(File.read(file))
     people_data = []
     persons_json.each do |person|
+      age = person['age']
+      name = person['name']
+      id = person['id']
+
       case person['class']
       when 'Teacher'
-        people_data << Teacher.new(person['age'], person['name'], true, person['specialization'], id: person['id'])
+        spec = person['specialization']
+        people_data << Teacher.new(age, name, true, spec, id: id)
       when 'Student'
-        people_data << Student.new(person['age'], person['name'], parent_permission: person['parent_permission'],
-                                                                  id: person['id'])
+        pp = person['parent_permission']
+        people_data << Student.new(age, name, parent_permission: pp, id: id)
       end
     end
     file.close
@@ -25,8 +29,7 @@ module DataLoaders
     return [] unless File.exist?(file_path)
 
     file = File.open(file_path)
-    books_read = File.read(file)
-    books_json = JSON.parse(books_read)
+    books_json = JSON.parse(File.read(file))
     books_data = []
 
     books_json.each do |book|
@@ -41,12 +44,15 @@ module DataLoaders
     return [] unless File.exist?(file_path)
 
     file = File.open(file_path)
-    rentals_read = File.read(file)
-    rentals_json = JSON.parse(rentals_read)
+    rentals_json = JSON.parse(File.read(file))
     rentals_data = []
 
     rentals_json.each do |rental|
-      rentals_data << Rental.new(@books[rental['book_index']], @people[rental['person_index']], rental['date'])
+      book = @books[rental['book_index']]
+      person = @people[rental['person_index']]
+      date = rental['date']
+
+      rentals_data << Rental.new(book, person, date)
     end
     file.close
     rentals_data
