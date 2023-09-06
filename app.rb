@@ -29,9 +29,9 @@ class App
   include DataLoaders
 
   def initialize
-    @people = []
-    @books = []
-    @rentals = []
+    @people = load_people()
+    @books = load_books()
+    @rentals = load_rentals()
   end
 
   def run

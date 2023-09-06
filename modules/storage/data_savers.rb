@@ -2,31 +2,31 @@ require 'json'
 
 module DataSavers
   def save_data
-    persons = @people.each_with_index.map do |person, index|
+    people_hash = @people.each_with_index.map do |person, index|
       { class: person.class, age: person.age, name: person.name,
-        specialization: (person.specialization if person.instance_of?(Teacher)),
+        specialization: (person.specialization if person.is_a?(Teacher)),
         parent_permission: person.parent_permission, index: index, id: person.id }
     end
 
-    json_person = JSON.generate(persons)
-    File.write('person.json', json_person)
-
-    books = @books.each_with_index.map do |book, index|
-      {
-        title: book.title, author: book.author, index: index
-      }
+    books_hash = @books.each_with_index.map do |book, index|
+      { title: book.title, author: book.author, index: index }
     end
-    json_books = JSON.generate(books)
-    File.write('books.json', json_books)
 
-    rentals = @rentals.each_with_index.map do |rental, _index|
+    rentals_hash = @rentals.each_with_index.map do |rental, _index|
       {
-        date: rental.date, book_index: @books.index(rental.book),
-        person_index: @person.index(rental.person)
+        person_index: @people.index(rental.person), book_index: @books.index(rental.book), date: rental.date
       }
     end
 
-    json_rentals = JSON.generate(rentals)
-    File.write('rentals.json', json_rentals)
+    create_file('person.json', people_hash)
+    create_file('books.json', books_hash)
+    create_file('rentals.json', rentals_hash)
+  end
+
+  private
+
+  def create_file(file_name, data)
+    json_data = JSON.generate(data)
+    File.write("data/#{file_name}", json_data)
   end
 end
