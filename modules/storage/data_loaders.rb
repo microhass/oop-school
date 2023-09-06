@@ -10,9 +10,9 @@ module DataLoaders
     persons_json.each do |person|
       case person['class']
       when 'Teacher'
-        people_data << Teacher.new(person['age'], person['name'], true, person['specialization'])
+        people_data << Teacher.new(person['age'], person['name'], true, person['specialization'], id: person['id'])
       when 'Student'
-        people_data << Student.new(person['age'], person['name'], parent_permission: person['parent_permission'])
+        people_data << Student.new(person['age'], person['name'], parent_permission: person['parent_permission'], id: person['id'])
       end
     end
     file.close

@@ -4,12 +4,12 @@ class Person < Nameable
   attr_accessor(:name, :age, :rentals, :parent_permission)
   attr_reader(:id)
 
-  def initialize(age, name = 'Unknown', parent_pamission: true)
+  def initialize(age, id, name = 'Unknown', parent_pamission: true)
     super()
     @name = name
     @age = age
     @parent_pamission = parent_pamission
-    @id = Time.new.to_i
+    @id = id
     @rentals = []
   end
 
